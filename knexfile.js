@@ -11,6 +11,11 @@ const sharedConfig = {
       ...sharedConfig,
       connection: { filename: './data/auth.db3' },
       seeds: { directory: './data/seeds' },
+    },
+    production: {
+      ...sharedConfig,
+      connection: { filename: './data/auth.db3' },
+      seeds: { directory: './data/seeds' },
     }
   };
   
