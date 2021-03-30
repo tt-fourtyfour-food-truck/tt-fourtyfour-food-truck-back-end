@@ -16,9 +16,9 @@ router.post('/register',checkUsernameAlreadyExists,validateRequest, (req, res, n
   
     Users.add(credentials)
       .then(user => {
-        res.status(201).json(user);
+        res.status(201).json({data: user});
       }).catch(error => {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: "error during registration:" + error.message });
       })
   });
 
