@@ -22,4 +22,33 @@ router.post('/register',checkUsernameAlreadyExists,validateRequest, (req, res, n
       })
   });
 
+  router.post('/login', validateRequest, checkUsernameExists, async (req, res) => {
+
+  const { username, password } = req.body;
+  const [User] = await Users.findBy({username:username})
+
+  if (User && bcryptjs.compareSync(password, User.password)) {
+    const token = buildToken(User);
+      res.status(200).json({
+        message: `welcome, ${User.username}`,
+        token: token
+    })
+  } else {
+    res.status(401).json({ message: "invalid credentials" });
+  }
+});
+
+function buildToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  }
+  const config = {
+    expiresIn: '1d',
+  }
+  return jwt.sign(
+    payload, JWT_SECRET, config
+  )
+}
+
 module.exports = router;
