@@ -10,14 +10,14 @@ exports.up = function(knex) {
             users.increments();
             users.string('username', 255).notNullable().unique().index();
             users.string('password', 255).notNullable();
+            users.string('email', 255).notNullable();
             users
                 .integer("role")
                 .unsigned()
                 .references("roles.id")
                 .onDelete("RESTRICT")
                 .onUpdate("CASCADE")
-                .defaultTo(2);
-                
+                .defaultTo(2); // 2 means all seeds will be diners
         });
 
 
