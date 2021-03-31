@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Users = require("./users-model.js");
 const restricted = require('./restricted')
 
-router.get("/", restricted, (req, res) => {
+router.get("/", (req, res) => { // add back restricted
     Users.find()
       .then(users => {
         res.json(users);
