@@ -9,7 +9,5 @@ router.get("/", (req, res) => { // add back restricted
       })
       .catch(err => res.send(err));
   });
-  
-  module.exports = router;
 
 module.exports = router;
